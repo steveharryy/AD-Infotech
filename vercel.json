@@ -1,12 +1,19 @@
 {
-  "functions": {
-    "index.php": {
-      "runtime": "vercel-php@0.7.2"
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.php",
+      "use": "vercel-php@0.7.2"
     },
-    "contact-handler.php": {
-      "runtime": "vercel-php@0.7.2"
+    {
+      "src": "contact-handler.php",
+      "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "assets/**",
+      "use": "@vercel/static"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/assets/(.*)",
