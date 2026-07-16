@@ -1,0 +1,24 @@
+{
+  "functions": {
+    "index.php": {
+      "runtime": "vercel-php@0.7.2"
+    },
+    "contact-handler.php": {
+      "runtime": "vercel-php@0.7.2"
+    }
+  },
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/contact-handler.php",
+      "dest": "/contact-handler.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.php"
+    }
+  ]
+}
