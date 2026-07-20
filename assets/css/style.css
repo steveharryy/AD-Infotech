@@ -3311,20 +3311,18 @@ textarea.form-control {
 }
 
 .brand-logo-img {
-  max-width: 100%;
-  max-height: 54px;
+  max-width: 85%;
+  max-height: 52px;
   width: auto;
   height: auto;
   object-fit: contain;
-  filter: grayscale(20%);
-  opacity: 0.9;
-  transition: all 0.3s ease;
+  filter: none;
+  opacity: 1;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .brand-card:hover .brand-logo-img {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 /* Nav Arrow Buttons */
