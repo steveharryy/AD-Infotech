@@ -611,6 +611,147 @@ $base_path = $base_path . '/';
     </section>
 
     <!-- -------------------------------------------------------------
+         BRANDS WE DEAL IN SECTION (SLIDER CAROUSEL)
+         ------------------------------------------------------------- -->
+    <section class="section-padding brands-section" id="brands">
+        <div class="container">
+            <div class="brands-wrapper-box">
+                <h2 class="brands-title">Brands We Deal In</h2>
+
+                <!-- Slider Container -->
+                <div class="brands-carousel-container">
+                    <!-- Left Arrow Button -->
+                    <button class="brands-nav-btn brands-prev" id="brands-prev-btn" aria-label="Previous Brands">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+
+                    <!-- Viewport Track -->
+                    <div class="brands-viewport">
+                        <div class="brands-track" id="brands-track">
+                            <!-- 1. CP Plus -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/cp-plus.svg" alt="CP Plus Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 2. Hikvision -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/hikvision.svg" alt="Hikvision Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 3. Dahua -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/dahua.svg" alt="Dahua Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 4. SonicWall -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/sonicwall.svg" alt="SonicWall Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 5. Cyberoam -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/cyberoam.svg" alt="Cyberoam Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 6. Samsung -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/samsung.svg" alt="Samsung Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 7. Microsoft -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/microsoft.svg" alt="Microsoft Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 8. Cisco -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/cisco.svg" alt="Cisco Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 9. Lenovo -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/lenovo.svg" alt="Lenovo Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 10. Acer -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/acer.svg" alt="Acer Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 11. Dell -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/dell.svg" alt="Dell Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 12. HP -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/hp.svg" alt="HP Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 13. D-Link -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/dlink.svg" alt="D-Link Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 14. Toshiba -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/toshiba.svg" alt="Toshiba Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 15. McAfee -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/mcafee.svg" alt="McAfee Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 16. LG -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/lg.svg" alt="LG Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 17. Intel -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/intel.svg" alt="Intel Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                            <!-- 18. Seagate -->
+                            <div class="brand-slide">
+                                <div class="brand-card">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/seagate.svg" alt="Seagate Logo" class="brand-logo-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Arrow Button -->
+                    <button class="brands-nav-btn brands-next" id="brands-next-btn" aria-label="Next Brands">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+
+                <!-- Pagination Dots Indicator -->
+                <div class="brands-dots-container" id="brands-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- -------------------------------------------------------------
          WHY CHOOSE US
          ------------------------------------------------------------- -->
     <section id="why-choose-us" class="section-padding whyus-section">

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <path d="M15 28 A 12 12 0 1 0 39 28 A 12 12 0 1 0 15 28 Z" fill="none" stroke="#DC2626" stroke-width="4"/>
+  <text x="42" y="38" font-family="'Arial Black', sans-serif" font-style="italic" font-weight="900" font-size="26" fill="#0F172A">alhua</text>
+  <text x="44" y="49" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="7" fill="#DC2626" letter-spacing="2">TECHNOLOGY</text>
+</svg>
