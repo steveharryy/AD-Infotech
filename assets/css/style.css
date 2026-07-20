@@ -3193,3 +3193,46 @@ textarea.form-control {
   .card-amc { bottom: 22%; left: 0%; }
   .card-doorstep { bottom: 5%; right: -2%; }
 }
+
+/* -------------------------------------------------------------
+   Logo Image Styling
+   ------------------------------------------------------------- */
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: block;
+}
+
+.nav-brand:hover .nav-logo-img {
+  transform: scale(1.04);
+}
+
+.nav-bar.not-scrolled .logo-light {
+  display: none !important;
+}
+.nav-bar.not-scrolled .logo-dark {
+  display: block !important;
+}
+
+.nav-bar.scrolled .logo-dark {
+  display: none !important;
+}
+.nav-bar.scrolled .logo-light {
+  display: block !important;
+}
+
+.footer-logo-img {
+  height: 34px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.footer-logo:hover .footer-logo-img {
+  transform: scale(1.04);
+}

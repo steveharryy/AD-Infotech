@@ -60,19 +60,10 @@ $base_path = $base_path . '/';
     <header class="sticky-header-container">
         <nav class="nav-bar not-scrolled">
             <!-- Logo -->
-            <a href="#home" class="nav-brand">
-                <svg class="nav-logo-svg" viewBox="0 0 100 100">
-                    <polygon points="50,5 90,28 90,72 50,95 10,72 10,28" fill="none" stroke="url(#nav-logo-grad)" stroke-width="8"/>
-                    <text x="50" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" fill="currentColor" text-anchor="middle">ADI</text>
-                    <defs>
-                        <linearGradient id="nav-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#4F46E5" />
-                            <stop offset="50%" stop-color="#7C3AED" />
-                            <stop offset="100%" stop-color="#06B6D4" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="nav-brand-text">AD <span class="nav-brand-sub">Infotech</span></span>
+            <a href="#home" class="nav-brand" aria-label="AD Infotech Home">
+                <img src="<?php echo $base_path; ?>assets/images/logo-dark.png" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
+                <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="nav-logo-img logo-light">
+                <span class="nav-brand-sub">Infotech</span>
             </a>
 
             <!-- Navigation Links (Desktop) -->
@@ -882,17 +873,9 @@ $base_path = $base_path . '/';
         <div class="container footer-grid">
             <!-- Col 1: Brand details -->
             <div class="footer-brand">
-                <a href="#home" class="footer-logo">
-                    <svg class="footer-logo-svg" viewBox="0 0 100 100">
-                        <polygon points="50,5 90,28 90,72 50,95 10,72 10,28" fill="none" stroke="url(#footer-logo-grad)" stroke-width="8"/>
-                        <defs>
-                            <linearGradient id="footer-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#4F46E5" />
-                                <stop offset="100%" stop-color="#06B6D4" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <span class="footer-logo-title">AD <span class="footer-logo-sub">Infotech</span></span>
+                <a href="#home" class="footer-logo" aria-label="AD Infotech Home">
+                    <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="footer-logo-img">
+                    <span class="footer-logo-sub">Infotech</span>
                 </a>
                 <p class="footer-brand-desc">Providing premium enterprise-level IT hardware, peripherals, and proactive support services across New Delhi since 2006.</p>
                 
