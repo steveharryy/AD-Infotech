@@ -63,7 +63,7 @@ $base_path = $base_path . '/';
             <a href="#home" class="nav-brand" aria-label="AD Infotech Home">
                 <img src="<?php echo $base_path; ?>assets/images/logo-dark.png" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
                 <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="nav-logo-img logo-light">
-                <span class="nav-brand-sub">Infotech</span>
+                
             </a>
 
             <!-- Navigation Links (Desktop) -->
@@ -875,7 +875,7 @@ $base_path = $base_path . '/';
             <div class="footer-brand">
                 <a href="#home" class="footer-logo" aria-label="AD Infotech Home">
                     <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="footer-logo-img">
-                    <span class="footer-logo-sub">Infotech</span>
+                    
                 </a>
                 <p class="footer-brand-desc">Providing premium enterprise-level IT hardware, peripherals, and proactive support services across New Delhi since 2006.</p>
                 
