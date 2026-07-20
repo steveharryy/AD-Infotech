@@ -661,7 +661,7 @@ $base_path = $base_path . '/';
                             <!-- 6. Samsung -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/samsung.svg" alt="Samsung Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/samsung.png" alt="Samsung Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 7. Microsoft -->
@@ -679,19 +679,19 @@ $base_path = $base_path . '/';
                             <!-- 9. Lenovo -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/lenovo.svg" alt="Lenovo Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/lenovo.png" alt="Lenovo Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 10. Acer -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/acer.svg" alt="Acer Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/acer.png" alt="Acer Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 11. Dell -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/dell.svg" alt="Dell Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/dell.png" alt="Dell Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 12. HP -->
