@@ -266,6 +266,15 @@ document.addEventListener("DOMContentLoaded", () => {
         submitText.textContent = "Send Message";
 
         if (data.status === "success") {
+          // Construct pre-filled WhatsApp message
+          const serviceSelect = document.getElementById("service");
+          const serviceName = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : service;
+          const waMessage = `Hello AD Infotech,\n\n*New Website Enquiry*\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📞 *Phone:* ${phone || 'Not provided'}\n🛠 *Service:* ${serviceName}\n💬 *Message:* ${message}`;
+          const whatsappUrl = `https://wa.me/919811022936?text=${encodeURIComponent(waMessage)}`;
+
+          // Redirect to WhatsApp
+          window.open(whatsappUrl, "_blank");
+
           // Show beautiful success notification banner
           successBox.style.display = "flex";
           contactForm.reset();
@@ -279,13 +288,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       })
       .catch((err) => {
-        // Reset states on error
+        // Reset states on error and still open WhatsApp fallback
         submitBtn.disabled = false;
         spinnerIcon.style.display = "none";
         sendIcon.style.display = "inline";
         submitText.textContent = "Send Message";
-        console.error("Submission error:", err);
-        alert("Failed to send message: " + err.message + ". Please verify connection or try again later.");
+
+        const serviceSelect = document.getElementById("service");
+        const serviceName = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : service;
+        const waMessage = `Hello AD Infotech,\n\n*New Website Enquiry*\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📞 *Phone:* ${phone || 'Not provided'}\n🛠 *Service:* ${serviceName}\n💬 *Message:* ${message}`;
+        const whatsappUrl = `https://wa.me/919811022936?text=${encodeURIComponent(waMessage)}`;
+        
+        window.open(whatsappUrl, "_blank");
+        successBox.style.display = "flex";
+        contactForm.reset();
       });
     });
   }

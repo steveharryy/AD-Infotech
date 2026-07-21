@@ -1,0 +1,52 @@
+[
+    {
+        "id": "enq_6a5f5010aac7e",
+        "timestamp": "2026-07-21 12:55:12",
+        "name": "DeepSeek",
+        "email": "adinfotech22@gmail.com",
+        "phone": "+919911022936",
+        "service": "hardware",
+        "message": "boevbew",
+        "ip_address": "::1"
+    },
+    {
+        "id": "enq_6a5f508f41e43",
+        "timestamp": "2026-07-21 12:57:19",
+        "name": "Test Customer",
+        "email": "customer@example.com",
+        "phone": "+919876543210",
+        "service": "hardware",
+        "message": "Testing email delivery and enquiry logging.",
+        "ip_address": "::1"
+    },
+    {
+        "id": "enq_6a5f50bbba651",
+        "timestamp": "2026-07-21 12:58:03",
+        "name": "DeepSeek",
+        "email": "adinfotech22@gmail.com",
+        "phone": "+919911022936",
+        "service": "hardware",
+        "message": "m'm",
+        "ip_address": "::1"
+    },
+    {
+        "id": "enq_6a5f515fce043",
+        "timestamp": "2026-07-21 13:00:47",
+        "name": "SMTP Test User",
+        "email": "smtptest@example.com",
+        "phone": "+919876543210",
+        "service": "hardware",
+        "message": "Testing SMTP integration with automatic fallback.",
+        "ip_address": "::1"
+    },
+    {
+        "id": "enq_6a5f526ebbc1e",
+        "timestamp": "2026-07-21 13:05:18",
+        "name": "Client Review Test",
+        "email": "client@adinfotech.in",
+        "phone": "+919811022936",
+        "service": "hardware",
+        "message": "Checking website form readiness.",
+        "ip_address": "::1"
+    }
+]

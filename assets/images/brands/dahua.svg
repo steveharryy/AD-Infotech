@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" width="240" height="70">
-  <!-- Dahua Red Oval 'a' emblem -->
-  <ellipse cx="32" cy="36" rx="20" ry="16" fill="none" stroke="#E11D48" stroke-width="5" transform="rotate(-15 32 36)"/>
-  <path d="M 24 26 C 20 32, 20 42, 28 46 C 36 46, 40 38, 40 30 C 40 22, 32 20, 24 26 Z" fill="#E11D48"/>
-  <text x="54" y="46" font-family="'Arial Black', sans-serif" font-style="italic" font-weight="900" font-size="32" fill="#0F172A" letter-spacing="-1">hua</text>
-  <text x="56" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="9" fill="#E11D48" letter-spacing="2.5">TECHNOLOGY</text>
-</svg>

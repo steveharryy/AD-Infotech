@@ -637,25 +637,19 @@ $base_path = $base_path . '/';
                             <!-- 2. Hikvision -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/hikvision.svg" alt="Hikvision Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/hikvision.png" alt="Hikvision Logo" class="brand-logo-img">
                                 </div>
                             </div>
-                            <!-- 3. Dahua -->
+                            <!-- 3. SonicWall -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/dahua.svg" alt="Dahua Logo" class="brand-logo-img">
-                                </div>
-                            </div>
-                            <!-- 4. SonicWall -->
-                            <div class="brand-slide">
-                                <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/sonicwall.svg" alt="SonicWall Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/sonicwall.png" alt="SonicWall Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 5. Cyberoam -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/cyberoam.svg" alt="Cyberoam Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/cyberoam.png" alt="Cyberoam Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 6. Samsung -->
@@ -697,43 +691,43 @@ $base_path = $base_path . '/';
                             <!-- 12. HP -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/hp.svg" alt="HP Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/hp.png" alt="HP Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 13. D-Link -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/dlink.svg" alt="D-Link Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/dlink.png" alt="D-Link Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 14. Toshiba -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/toshiba.svg" alt="Toshiba Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/toshiba.png" alt="Toshiba Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 15. McAfee -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/mcafee.svg" alt="McAfee Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/mcafee.png" alt="McAfee Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 16. LG -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/lg.svg" alt="LG Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/lg.png" alt="LG Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 17. Intel -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/intel.svg" alt="Intel Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/intel.png" alt="Intel Logo" class="brand-logo-img">
                                 </div>
                             </div>
                             <!-- 18. Seagate -->
                             <div class="brand-slide">
                                 <div class="brand-card">
-                                    <img src="<?php echo $base_path; ?>assets/images/brands/seagate.svg" alt="Seagate Logo" class="brand-logo-img">
+                                    <img src="<?php echo $base_path; ?>assets/images/brands/seagate.png" alt="Seagate Logo" class="brand-logo-img">
                                 </div>
                             </div>
                         </div>
