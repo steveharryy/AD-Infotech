@@ -18,7 +18,7 @@ $base_path = $base_path . '/';
     <meta name="description" content="A D Infotech provides premium computer hardware, desktop management services, AMC, networking, and IT support solutions in Nehru Place, New Delhi.">
     <meta name="keywords" content="AD Infotech, computer hardware, Nehru Place, IT support, AMC, server, workstation, CCTV, printer toner">
     <link rel="icon" type="image/x-icon" href="<?php echo $base_path; ?>assets/images/favicon.ico">
-    <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css?v=ui-20260724">
     <script>
         window.BASE_PATH = "<?php echo $base_path; ?>";
     </script>
@@ -40,10 +40,14 @@ $base_path = $base_path . '/';
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     <span>+91 85100 22936</span>
                 </a>
-                <a href="mailto:info@adinfotech.online" class="top-strip-link">
+                <a href="mailto:infotech.dilip@gmail.com" class="top-strip-link">
                     <!-- Mail Icon -->
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <span>info@adinfotech.online</span>
+                    <span>infotech.dilip@gmail.com</span>
+                </a>
+                <a href="mailto:salesadinfotech@gmail.com" class="top-strip-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>salesadinfotech@gmail.com</span>
                 </a>
             </div>
             <div class="top-strip-location">
@@ -69,11 +73,11 @@ $base_path = $base_path . '/';
             <!-- Navigation Links (Desktop) -->
             <ul class="nav-links-desktop">
                 <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="<?php echo $base_path; ?>about.php" class="nav-link">About</a></li>
+                <li><a href="<?php echo $base_path; ?>services.php" class="nav-link">Services</a></li>
+                <li><a href="<?php echo $base_path; ?>products.php" class="nav-link">Products</a></li>
                 <li><a href="#why-choose-us" class="nav-link">Why Us</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="<?php echo $base_path; ?>contact.php" class="nav-link">Contact</a></li>
             </ul>
 
             <!-- Actions (Desktop) -->
@@ -84,7 +88,7 @@ $base_path = $base_path . '/';
                     <span>Search Services</span>
                     <span class="nav-search-key">⌘K</span>
                 </div>
-                <a href="#contact" class="btn btn-primary">Let's Talk</a>
+                <a href="<?php echo $base_path; ?>contact.php" class="btn btn-primary">Let's Talk</a>
             </div>
 
             <!-- Menu Toggle Button (Mobile) -->
@@ -99,11 +103,11 @@ $base_path = $base_path . '/';
             <div class="mobile-menu-panel">
                 <ul class="mobile-menu-links">
                     <li><a href="#home" class="mobile-menu-link active">Home</a></li>
-                    <li><a href="#about" class="mobile-menu-link">About</a></li>
-                    <li><a href="#services" class="mobile-menu-link">Services</a></li>
-                    <li><a href="#products" class="mobile-menu-link">Products</a></li>
+                    <li><a href="<?php echo $base_path; ?>about.php" class="mobile-menu-link">About</a></li>
+                    <li><a href="<?php echo $base_path; ?>services.php" class="mobile-menu-link">Services</a></li>
+                    <li><a href="<?php echo $base_path; ?>products.php" class="mobile-menu-link">Products</a></li>
                     <li><a href="#why-choose-us" class="mobile-menu-link">Why Us</a></li>
-                    <li><a href="#contact" class="mobile-menu-link">Contact</a></li>
+                    <li><a href="<?php echo $base_path; ?>contact.php" class="mobile-menu-link">Contact</a></li>
                 </ul>
                 <div class="mobile-menu-cta">
                     <a href="#contact" class="btn btn-gradient btn-full">Let's Talk</a>
@@ -126,23 +130,23 @@ $base_path = $base_path . '/';
                 <div class="hero-tag">
                     <!-- Sparkles Icon -->
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707"/></svg>
-                    <span>Genuine Laptops, Printers & Computer Service Center</span>
+                    <span>Trusted IT Partner Since 2006</span>
                 </div>
                 <h1 class="hero-title">
-                    Computer Sales, Rentals <br class="hidden-xs">
-                    & <span class="gradient-text">Expert Repairs</span>
+                    Power Your Work.<br>
+                    Protect Your <span class="gradient-text">Future.</span>
                 </h1>
                 <p class="hero-desc">
-                    We sell original laptops, desktops, printers, and genuine cartridges at wholesale prices. We also offer fast doorstep repair services and computer AMC maintenance for offices and homes across Delhi NCR.
+                    Reliable hardware, responsive IT support, and expert repair services for businesses and homes across Delhi NCR.
                 </p>
                 <div class="hero-actions">
-                    <a href="#services" class="btn btn-gradient btn-lg">
-                        <span>Explore Services</span>
+                    <a href="#contact" class="btn btn-gradient btn-lg">
+                        <span>Get IT Support</span>
                         <!-- ArrowRight Icon -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
                     </a>
-                    <a href="#contact" class="btn btn-secondary btn-lg">
-                        <span>Book a Service</span>
+                    <a href="<?php echo $base_path; ?>products.php" class="btn btn-secondary btn-lg">
+                        <span>View Products</span>
                     </a>
                 </div>
                 <!-- Stats Grid -->
@@ -162,11 +166,10 @@ $base_path = $base_path . '/';
                 </div>
             </div>
 
-            <!-- Right Illustration Graphic -->
+            <!-- Full-bleed visual treatment with a supporting service image -->
             <div class="hero-media">
                 <div class="hero-illustration-container">
-                    <!-- The main generated illustration -->
-                    <img src="<?php echo $base_path; ?>assets/images/hero_it_illustration.png" alt="AD Infotech IT Solutions" class="hero-illustration-img">
+                    <img src="<?php echo $base_path; ?>assets/images/hero_it_infrastructure.png" alt="AD Infotech IT infrastructure" class="hero-illustration-img">
                     
                     <!-- Floating Glassmorphism Cards -->
                     <!-- Card 1: Genuine Products -->
@@ -230,9 +233,12 @@ $base_path = $base_path . '/';
 
             <!-- Content Grid -->
             <div class="about-grid">
+                <div class="about-media-feature">
+                    <img src="<?php echo $base_path; ?>assets/images/about_workspace.png" alt="AD Infotech technician repairing a laptop">
+                    <div class="about-experience-badge"><strong>20+</strong><span>Years of<br>expertise</span></div>
+                </div>
 
-
-                <!-- Right Copywriting -->
+                <!-- Copywriting -->
                 <div class="about-content">
                     <h3 class="about-title">Welcome to AD Infotech</h3>
                     <p class="about-lead">
@@ -883,7 +889,6 @@ $base_path = $base_path . '/';
                             <div>
                                 <h5 class="contact-detail-lbl">Email Enquiries</h5>
                                 <div class="contact-detail-val">
-                                    <a href="mailto:info@adinfotech.online">info@adinfotech.online</a>
                                     <a href="mailto:infotech.dilip@gmail.com">infotech.dilip@gmail.com</a>
                                     <a href="mailto:salesadinfotech@gmail.com">salesadinfotech@gmail.com</a>
                                 </div>
@@ -1044,11 +1049,11 @@ $base_path = $base_path . '/';
                 <h4 class="footer-col-title">Quick Links</h4>
                 <ul class="footer-links">
                     <li><a href="#home" class="footer-link">Home</a></li>
-                    <li><a href="#about" class="footer-link">About Us</a></li>
-                    <li><a href="#services" class="footer-link">Our Services</a></li>
-                    <li><a href="#products" class="footer-link">Product Catalog</a></li>
+                    <li><a href="<?php echo $base_path; ?>about.php" class="footer-link">About Us</a></li>
+                    <li><a href="<?php echo $base_path; ?>services.php" class="footer-link">Our Services</a></li>
+                    <li><a href="<?php echo $base_path; ?>products.php" class="footer-link">Product Catalog</a></li>
                     <li><a href="#why-choose-us" class="footer-link">Why Choose Us</a></li>
-                    <li><a href="#contact" class="footer-link">Contact Support</a></li>
+                    <li><a href="<?php echo $base_path; ?>contact.php" class="footer-link">Contact Support</a></li>
                 </ul>
             </div>
 
@@ -1070,7 +1075,6 @@ $base_path = $base_path . '/';
         <div class="footer-bottom">
             <div class="container footer-bottom-container">
                 <p>&copy; <?php echo date('Y'); ?> A D Infotech. All rights reserved.</p>
-                <p>Designed with Glassmorphism & High-Performance UI systems.</p>
             </div>
         </div>
     </footer>

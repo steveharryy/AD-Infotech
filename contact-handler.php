@@ -76,11 +76,11 @@ require_once __DIR__ . '/smtp-mailer.php';
 $smtpHost = 'smtp.gmail.com';
 $smtpPort = 587; // 587 for TLS or 465 for SSL
 $smtpSecure = 'tls'; // 'tls' or 'ssl'
-$smtpUser = 'adinfotech22@gmail.com'; // Your SMTP Username / Gmail Address
+$smtpUser = 'infotech.dilip@gmail.com'; // Your SMTP Username / Gmail Address
 $smtpPass = ''; // Your Gmail App Password / SMTP Password
 
 // Target email address where enquiries are received
-$recipientEmail = 'adinfotech22@gmail.com';
+$recipientEmail = 'infotech.dilip@gmail.com';
 $emailSubject = 'New Contact Enquiry from AD Infotech Website: ' . htmlspecialchars($name);
 
 $emailBody = "
