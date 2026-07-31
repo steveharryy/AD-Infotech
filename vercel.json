@@ -1,67 +1,42 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "index.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "about.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "services.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "products.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "contact.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "contact-handler.php",
-      "use": "vercel-php"
-    },
-    {
-      "src": "assets/**",
-      "use": "@vercel/static"
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
     {
-      "src": "/about",
-      "dest": "/about.php"
+      "src": "/about(\\.php)?",
+      "dest": "/api/about.php"
     },
     {
-      "src": "/services",
-      "dest": "/services.php"
+      "src": "/services(\\.php)?",
+      "dest": "/api/services.php"
     },
     {
-      "src": "/products",
-      "dest": "/products.php"
+      "src": "/products(\\.php)?",
+      "dest": "/api/products.php"
     },
     {
-      "src": "/contact",
-      "dest": "/contact.php"
+      "src": "/contact(\\.php)?",
+      "dest": "/api/contact.php"
     },
     {
       "src": "/contact-handler.php",
-      "dest": "/contact-handler.php"
+      "dest": "/api/contact-handler.php"
     },
     {
-      "src": "/(.*\\.php)",
-      "dest": "/$1"
+      "src": "/index(\\.php)?",
+      "dest": "/api/index.php"
     },
     {
       "src": "/",
-      "dest": "/index.php"
+      "dest": "/api/index.php"
     }
   ]
 }
