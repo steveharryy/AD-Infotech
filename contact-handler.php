@@ -1,167 +1,93 @@
 <?php
-/**
- * AJAX Contact Form Submission Handler for AD Infotech Redesign
- */
 
-// Allow only POST requests
+require_once __DIR__ . '/security-headers.php';
+require_once __DIR__ . '/env-loader.php';
+require_once __DIR__ . '/session-init.php';
+require_once __DIR__ . '/db.php';
+
+load_env_vars();
+start_secure_session();
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('HTTP/1.1 405 Method Not Allowed');
-    echo json_encode(['status' => 'error', 'message' => 'Only POST requests are allowed.']);
+    echo json_encode(['status' => 'error', 'message' => 'Only POST requests allowed.']);
     exit;
 }
 
-// Set JSON Response Header
 header('Content-Type: application/json');
 
-// Gather input fields
-$name = isset($_POST['name']) ? trim($_POST['name']) : '';
-$email = isset($_POST['email']) ? trim($_POST['email']) : '';
-$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
-$service = isset($_POST['service']) ? trim($_POST['service']) : 'hardware';
-$message = isset($_POST['message']) ? trim($_POST['message']) : '';
-
-// Validation checks
-if (empty($name)) {
-    echo json_encode(['status' => 'error', 'message' => 'Full Name is a required field.']);
+$csrf = $_POST['csrf_token'] ?? '';
+if (!empty($_SESSION['csrf_token']) && !hash_equals($_SESSION['csrf_token'], $csrf)) {
+    header('HTTP/1.1 403 Forbidden');
+    echo json_encode(['status' => 'error', 'message' => 'Invalid CSRF token.']);
     exit;
 }
 
-if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['status' => 'error', 'message' => 'A valid Email Address is required.']);
+$clientIP = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+$now = time();
+$rateFile = __DIR__ . '/rate_limits.json';
+$limits = file_exists($rateFile) ? (json_decode(@file_get_contents($rateFile), true) ?: []) : [];
+
+$userTs = array_values(array_filter($limits[$clientIP] ?? [], fn($ts) => ($now - $ts) < 600));
+if (count($userTs) >= 5) {
+    header('HTTP/1.1 429 Too Many Requests');
+    echo json_encode(['status' => 'error', 'message' => 'Too many requests. Try again in 10 minutes.']);
     exit;
 }
 
-if (empty($message)) {
-    echo json_encode(['status' => 'error', 'message' => 'Message content is required.']);
+$userTs[] = $now;
+$limits[$clientIP] = $userTs;
+@file_put_contents($rateFile, json_encode($limits), LOCK_EX);
+
+$name = str_replace(["\r", "\n"], '', strip_tags(trim($_POST['name'] ?? '')));
+$email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
+$phone = str_replace(["\r", "\n"], '', strip_tags(trim($_POST['phone'] ?? '')));
+$service = str_replace(["\r", "\n"], '', strip_tags(trim($_POST['service'] ?? 'hardware')));
+$message = strip_tags(trim($_POST['message'] ?? ''));
+
+if (empty($name) || !$email || empty($message)) {
+    echo json_encode(['status' => 'error', 'message' => 'Please provide valid Name, Email, and Message.']);
     exit;
 }
 
-// Log / Store Enquiry locally in a JSON database file
-$dbFile = __DIR__ . '/enquiries.json';
-$enquiries = [];
+$uid = uniqid('enq_');
+$nowStr = date('Y-m-d H:i:s');
+$pdo = get_db_connection();
 
-if (file_exists($dbFile)) {
-    $fileData = file_get_contents($dbFile);
-    if (!empty($fileData)) {
-        $decoded = json_decode($fileData, true);
-        if (is_array($decoded)) {
-            $enquiries = $decoded;
-        }
+if ($pdo !== null) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO enquiries (enquiry_uid, name, email, phone, service, message, ip_address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$uid, $name, $email, $phone, $service, $message, $clientIP, $nowStr]);
+    } catch (PDOException $e) {
+        error_log("DB Insert Error: " . $e->getMessage());
     }
 }
 
-// Construct new enquiry payload
-$newEnquiry = [
-    'id' => uniqid('enq_'),
-    'timestamp' => date('Y-m-d H:i:s'),
-    'name' => htmlspecialchars($name),
-    'email' => htmlspecialchars($email),
-    'phone' => htmlspecialchars($phone),
-    'service' => htmlspecialchars($service),
-    'message' => htmlspecialchars($message),
-    'ip_address' => $_SERVER['REMOTE_ADDR'] ?? 'unknown'
-];
-
-// Append to log list
-$enquiries[] = $newEnquiry;
-
-// Write back to file with lock
-$savedLocally = file_put_contents($dbFile, json_encode($enquiries, JSON_PRETTY_PRINT), LOCK_EX) !== false;
-
-require_once __DIR__ . '/smtp-mailer.php';
-
-// -------------------------------------------------------------
-// SMTP Settings (Configure these for 100% Direct Inbox Delivery)
-// -------------------------------------------------------------
-$smtpHost = 'smtp.gmail.com';
-$smtpPort = 587; // 587 for TLS or 465 for SSL
-$smtpSecure = 'tls'; // 'tls' or 'ssl'
-$smtpUser = 'infotech.dilip@gmail.com'; // Your SMTP Username / Gmail Address
-$smtpPass = ''; // Your Gmail App Password / SMTP Password
-
-// Target email address where enquiries are received
-$recipientEmail = 'infotech.dilip@gmail.com';
-$emailSubject = 'New Contact Enquiry from AD Infotech Website: ' . htmlspecialchars($name);
-
-$emailBody = "
-<html>
-<head>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fdfdfd; }
-    .header { background: #0052cc; color: #ffffff; padding: 15px 20px; border-radius: 6px 6px 0 0; }
-    .header h2 { margin: 0; font-size: 20px; }
-    .field { margin-bottom: 12px; }
-    .label { font-weight: bold; color: #555; }
-    .value { background: #f4f6f9; padding: 8px 12px; border-radius: 4px; display: block; margin-top: 4px; word-break: break-word; }
-    .footer { margin-top: 20px; font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
-  </style>
-</head>
-<body>
-  <div class='container'>
-    <div class='header'>
-      <h2>New Website Enquiry</h2>
-    </div>
-    <div style='padding: 20px 0;'>
-      <div class='field'><span class='label'>Full Name:</span> <span class='value'>" . htmlspecialchars($name) . "</span></div>
-      <div class='field'><span class='label'>Email Address:</span> <span class='value'>" . htmlspecialchars($email) . "</span></div>
-      <div class='field'><span class='label'>Phone Number:</span> <span class='value'>" . htmlspecialchars($phone ?: 'Not provided') . "</span></div>
-      <div class='field'><span class='label'>Requested Service:</span> <span class='value'>" . htmlspecialchars(ucwords(str_replace('_', ' ', $service))) . "</span></div>
-      <div class='field'><span class='label'>Message:</span> <span class='value'>" . nl2br(htmlspecialchars($message)) . "</span></div>
-      <div class='field'><span class='label'>Submission Time:</span> <span class='value'>" . date('Y-m-d H:i:s') . "</span></div>
-    </div>
-    <div class='footer'>
-      This email was sent automatically from the AD Infotech website contact form.
-    </div>
-  </div>
-</body>
-</html>
-";
-
-$mailSent = false;
-$smtpError = null;
-
-// Attempt 1: SMTP Delivery if password is provided
-if (!empty($smtpUser) && !empty($smtpPass)) {
-    $smtp = new SimpleSMTP($smtpHost, $smtpPort, $smtpUser, $smtpPass, $smtpSecure);
-    $smtpResult = $smtp->send(
-        $recipientEmail,
-        $emailSubject,
-        $emailBody,
-        $smtpUser,
-        'AD Infotech Website',
-        $email
-    );
-    if ($smtpResult['success']) {
-        $mailSent = true;
-    } else {
-        $smtpError = $smtpResult['error'];
-    }
+$ep = getenv('FORMSPREE_ENDPOINT');
+if (!empty($ep) && strpos($ep, 'YOUR_FORM_ID') === false) {
+    $opt = [
+        'http' => [
+            'header'  => "Content-Type: application/x-www-form-urlencoded\r\nAccept: application/json\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query([
+                'name'    => $name,
+                'email'   => $email,
+                'phone'   => $phone ?: 'Not provided',
+                'service' => ucwords(str_replace('_', ' ', $service)),
+                'message' => $message,
+                '_to'     => 'info@adinfotech.online'
+            ]),
+            'timeout' => 8
+        ]
+    ];
+    @file_get_contents($ep, false, stream_context_create($opt));
 }
 
-// Attempt 2: Fallback to PHP native mail() if SMTP is not configured or fails
-if (!$mailSent) {
-    $headers = [];
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=utf-8';
-    $headers[] = 'From: AD Infotech Website <no-reply@' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . '>';
-    $headers[] = 'Reply-To: ' . htmlspecialchars($name) . ' <' . htmlspecialchars($email) . '>';
-    $headers[] = 'X-Mailer: PHP/' . phpversion();
+$emailSubject = "New Website Enquiry from " . $name;
+$emailHeaders = "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nFrom: AD Infotech <no-reply@adinfotech.online>\r\nReply-To: {$name} <{$email}>\r\n";
+$emailBody = "<h2>New Website Enquiry</h2><p><b>Name:</b> {$name}</p><p><b>Email:</b> {$email}</p><p><b>Phone:</b> " . ($phone ?: 'Not provided') . "</p><p><b>Service:</b> " . ucwords(str_replace('_', ' ', $service)) . "</p><p><b>Message:</b><br>" . nl2br(htmlspecialchars($message)) . "</p>";
 
-    $mailSent = @mail($recipientEmail, $emailSubject, $emailBody, implode("\r\n", $headers));
-}
+@mail('info@adinfotech.online', $emailSubject, $emailBody, $emailHeaders);
 
-if ($savedLocally || $mailSent) {
-    echo json_encode([
-        'status' => 'success',
-        'message' => 'Thank you for your enquiry. We will contact you shortly.',
-        'email_sent' => $mailSent,
-        'smtp_error' => $smtpError
-    ]);
-} else {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'We encountered an error processing your request. Please try again.'
-    ]);
-}
+echo json_encode(['status' => 'success', 'message' => 'Thank you for your enquiry. We will contact you shortly.']);
 exit;

@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // -------------------------------------------------------------
-  // 1. Navigation Scroll Effect & Active Link Highlighter
-  // -------------------------------------------------------------
+
   const navBar = document.querySelector(".nav-bar");
   const navLinks = document.querySelectorAll(".nav-link");
   const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
   const sections = ["home", "about", "services", "products", "why-choose-us", "contact"];
 
   function handleScroll() {
-    // Toggle sticky glass class
+
     if (window.scrollY > 50) {
       navBar.classList.add("scrolled");
       navBar.classList.remove("not-scrolled");
@@ -17,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navBar.classList.remove("scrolled");
     }
 
-    // Dynamic active link selection
     let currentActive = "home";
     const scrollY = window.pageYOffset;
 
@@ -33,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Update Desktop Nav Links
     navLinks.forEach((link) => {
       if (link.getAttribute("href") === `#${currentActive}`) {
         link.classList.add("active");
@@ -42,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Update Mobile Nav Links
     mobileMenuLinks.forEach((link) => {
       if (link.getAttribute("href") === `#${currentActive}`) {
         link.classList.add("active");
@@ -53,11 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.addEventListener("scroll", handleScroll);
-  handleScroll(); // Trigger on load
+  handleScroll();
 
-  // -------------------------------------------------------------
-  // 2. Mobile Menu Toggle Panel
-  // -------------------------------------------------------------
   const navToggleBtn = document.querySelector(".nav-toggle-btn");
   const mobileMenuPanel = document.querySelector(".mobile-menu-panel");
   const menuIcon = navToggleBtn.querySelector(".menu-icon");
@@ -74,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Close mobile menu when clicking a link
   mobileMenuLinks.forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenuPanel.classList.remove("open");
@@ -83,29 +74,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // -------------------------------------------------------------
-  // 3. Live Interactive Computer AMC Budget Estimator
-  // -------------------------------------------------------------
   const laptopsInput = document.getElementById("laptops-count");
   const desktopsInput = document.getElementById("desktops-count");
-  
   const laptopsValText = document.getElementById("laptops-val-text");
   const desktopsValText = document.getElementById("desktops-val-text");
-  
   const totalDevicesText = document.getElementById("calc-total-devices");
   const monthlyRateText = document.getElementById("calc-monthly-rate");
   const discountRow = document.getElementById("calc-discount-row");
   const discountValText = document.getElementById("calc-discount-val");
   const finalEstimateText = document.getElementById("calc-final-estimate");
   const whatsappCta = document.getElementById("calc-whatsapp-cta");
-  
+
   const termButtons = document.querySelectorAll(".calc-term-btn");
 
   let laptopsCount = 25;
   let workstationsCount = 5;
-  let duration = 12; // Months: 3, 6, 12
+  let duration = 12;
 
-  // Calculation rates (in Rupees)
   const LAPTOP_RATE = 500;
   const WORKSTATION_RATE = 1200;
 
@@ -120,24 +105,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateEstimator() {
     laptopsCount = parseInt(laptopsInput.value, 10) || 0;
     workstationsCount = parseInt(desktopsInput.value, 10) || 0;
-    
-    // Update slider label texts
+
     laptopsValText.textContent = `${laptopsCount} Devices`;
     desktopsValText.textContent = `${workstationsCount} Devices`;
 
-    // Perform AMC calculations
     const baseMonthlyCost = (laptopsCount * LAPTOP_RATE) + (workstationsCount * WORKSTATION_RATE);
     const rawTotal = baseMonthlyCost * duration;
 
-    // Discount percentage
     let discountRate = 0;
-    if (duration === 12) discountRate = 0.2; // 20%
-    else if (duration === 6) discountRate = 0.1; // 10%
+    if (duration === 12) discountRate = 0.2;
+    else if (duration === 6) discountRate = 0.1;
 
     const discountSaved = rawTotal * discountRate;
     const finalEstimate = rawTotal - discountSaved;
 
-    // Update Estimate summary card
     totalDevicesText.textContent = `${laptopsCount + workstationsCount} Items`;
     monthlyRateText.textContent = `${formatCurrency(baseMonthlyCost)} / mo`;
 
@@ -150,18 +131,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     finalEstimateText.textContent = formatCurrency(finalEstimate);
 
-    // Dynamic WhatsApp Link Generation
     const message = `Hello AD Infotech, I'm interested in an AMC maintenance quote:\n- Laptops: ${laptopsCount}\n- Desktops: ${workstationsCount}\n- Contract term: ${duration} months.\n\nMy estimated cost is ${formatCurrency(finalEstimate)}. Please contact me!`;
     whatsappCta.setAttribute("href", `https://wa.me/919811022936?text=${encodeURIComponent(message)}`);
   }
 
-  // Bind Slider Inputs
   if (laptopsInput && desktopsInput) {
     laptopsInput.addEventListener("input", updateEstimator);
     desktopsInput.addEventListener("input", updateEstimator);
   }
 
-  // Bind Term Buttons
   termButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       termButtons.forEach((b) => b.classList.remove("active"));
@@ -171,31 +149,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Run initial estimate
   if (laptopsInput) {
     updateEstimator();
   }
 
-  // -------------------------------------------------------------
-  // 4. Products Filter Tabs Menu
-  // -------------------------------------------------------------
   const filterButtons = document.querySelectorAll(".filter-btn");
   const productCards = document.querySelectorAll(".product-card");
 
   filterButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      // Toggle active states on tabs
+
       filterButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
       const filterValue = btn.getAttribute("data-filter");
 
-      // Filter product cards
       productCards.forEach((card) => {
         const cardCategory = card.getAttribute("data-category");
         if (filterValue === "all" || cardCategory === filterValue) {
           card.classList.remove("hidden");
-          // Re-trigger visual transition opacity
+
           card.style.opacity = "0";
           setTimeout(() => {
             card.style.opacity = "1";
@@ -207,9 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // -------------------------------------------------------------
-  // 5. Contact Form Handler (AJAX Submission)
-  // -------------------------------------------------------------
   const contactForm = document.getElementById("contact-enquiry-form");
   const successBox = document.getElementById("contact-success-toast");
   const submitBtn = document.getElementById("contact-submit-btn");
@@ -232,21 +202,24 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Enter submitting state
-      submitBtn.disabled = true;
-      spinnerIcon.style.display = "inline";
-      sendIcon.style.display = "none";
-      submitText.textContent = "Sending Request...";
+      if (submitBtn) submitBtn.disabled = true;
+      if (spinnerIcon) spinnerIcon.style.display = "inline";
+      if (sendIcon) sendIcon.style.display = "none";
+      if (submitText) submitText.textContent = "Sending Request...";
 
-      // Prepare request data
+      const csrfTokenEl = document.getElementById("csrf_token");
+      const csrfToken = csrfTokenEl ? csrfTokenEl.value : "";
+
       const formData = new FormData();
       formData.append("name", name);
       formData.append("email", email);
       formData.append("phone", phone);
       formData.append("service", service);
       formData.append("message", message);
+      if (csrfToken) {
+        formData.append("csrf_token", csrfToken);
+      }
 
-      // Perform AJAX Post
       const fetchUrl = (window.BASE_PATH || "") + "contact-handler.php";
       fetch(fetchUrl, {
         method: "POST",
@@ -259,56 +232,39 @@ document.addEventListener("DOMContentLoaded", () => {
         return res.json();
       })
       .then((data) => {
-        // Exit submitting state
-        submitBtn.disabled = false;
-        spinnerIcon.style.display = "none";
-        sendIcon.style.display = "inline";
-        submitText.textContent = "Send Message";
+        if (submitBtn) submitBtn.disabled = false;
+        if (spinnerIcon) spinnerIcon.style.display = "none";
+        if (sendIcon) sendIcon.style.display = "inline";
+        if (submitText) submitText.textContent = "Send Message";
 
         if (data.status === "success") {
-          // Construct pre-filled WhatsApp message
-          const serviceSelect = document.getElementById("service");
-          const serviceName = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : service;
-          const waMessage = `Hello AD Infotech,\n\n*New Website Enquiry*\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📞 *Phone:* ${phone || 'Not provided'}\n🛠 *Service:* ${serviceName}\n💬 *Message:* ${message}`;
-          const whatsappUrl = `https://wa.me/919811022936?text=${encodeURIComponent(waMessage)}`;
-
-          // Redirect to WhatsApp
-          window.open(whatsappUrl, "_blank");
-
-          // Show beautiful success notification banner
-          successBox.style.display = "flex";
+          if (successBox) successBox.style.display = "flex";
           contactForm.reset();
-          
-          // Hide success toast after 6 seconds
           setTimeout(() => {
-            successBox.style.display = "none";
+            if (successBox) successBox.style.display = "none";
           }, 6000);
         } else {
           alert("Error: " + (data.message || "Something went wrong. Please try again."));
         }
       })
       .catch((err) => {
-        // Reset states on error and still open WhatsApp fallback
-        submitBtn.disabled = false;
-        spinnerIcon.style.display = "none";
-        sendIcon.style.display = "inline";
-        submitText.textContent = "Send Message";
+        if (submitBtn) submitBtn.disabled = false;
+        if (spinnerIcon) spinnerIcon.style.display = "none";
+        if (sendIcon) sendIcon.style.display = "inline";
+        if (submitText) submitText.textContent = "Send Message";
 
         const serviceSelect = document.getElementById("service");
         const serviceName = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex].text : service;
         const waMessage = `Hello AD Infotech,\n\n*New Website Enquiry*\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📞 *Phone:* ${phone || 'Not provided'}\n🛠 *Service:* ${serviceName}\n💬 *Message:* ${message}`;
         const whatsappUrl = `https://wa.me/919811022936?text=${encodeURIComponent(waMessage)}`;
-        
+
         window.open(whatsappUrl, "_blank");
-        successBox.style.display = "flex";
+        if (successBox) successBox.style.display = "flex";
         contactForm.reset();
       });
     });
   }
 
-  // -------------------------------------------------------------
-  // 6. Brands We Deal In Carousel Slider Logic
-  // -------------------------------------------------------------
   const brandsTrack = document.getElementById("brands-track");
   const brandsPrevBtn = document.getElementById("brands-prev-btn");
   const brandsNextBtn = document.getElementById("brands-next-btn");
@@ -323,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function getItemsPerPage() {
       if (window.innerWidth <= 576) return 1;
       if (window.innerWidth <= 992) return 2;
-      return 3; // Desktop: 3 items per view
+      return 3;
     }
 
     function getMaxIndex() {
@@ -356,7 +312,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const translateX = -(currentIndex * slideWidthPercent);
       brandsTrack.style.transform = `translateX(${translateX}%)`;
 
-      // Update active dot
       const dots = Array.from(brandsDotsContainer.children);
       dots.forEach((dot, index) => {
         if (index === currentIndex) {
@@ -375,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function nextSlide() {
       const maxIdx = getMaxIndex();
       if (currentIndex >= maxIdx) {
-        currentIndex = 0; // Loop back to start
+        currentIndex = 0;
       } else {
         currentIndex++;
       }
@@ -385,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function prevSlide() {
       const maxIdx = getMaxIndex();
       if (currentIndex <= 0) {
-        currentIndex = maxIdx; // Loop to end
+        currentIndex = maxIdx;
       } else {
         currentIndex--;
       }
@@ -403,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function startAutoPlay() {
-      autoPlayTimer = setInterval(nextSlide, 3500); // Auto-slide every 3.5s
+      autoPlayTimer = setInterval(nextSlide, 3500);
     }
 
     function resetAutoPlay() {
@@ -411,7 +366,6 @@ document.addEventListener("DOMContentLoaded", () => {
       startAutoPlay();
     }
 
-    // Touch Swipe support for mobile
     let startX = 0;
     let isSwiping = false;
 
@@ -434,13 +388,11 @@ document.addEventListener("DOMContentLoaded", () => {
       isSwiping = false;
     });
 
-    // Handle Window Resize
     window.addEventListener("resize", () => {
       createDots();
       updateSlider();
     });
 
-    // Initialize
     createDots();
     updateSlider();
     startAutoPlay();

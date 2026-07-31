@@ -1,7 +1,14 @@
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+require_once __DIR__ . '/security-headers.php';
+require_once __DIR__ . '/env-loader.php';
+load_env_vars();
+header("Cache-Control: public, max-age=86400, stale-while-revalidate=600");
+require_once __DIR__ . '/session-init.php';
+start_secure_session();
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 $base_path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
@@ -16,7 +23,45 @@ $base_path = $base_path . '/';
     <meta name="description" content="Get in touch with AD Infotech for IT support, hardware, networking, AMC, and sales enquiries.">
     <link rel="icon" type="image/x-icon" href="<?php echo $base_path; ?>assets/images/favicon.ico">
     <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css?v=ui-20260724">
-    <script>window.BASE_PATH = "<?php echo $base_path; ?>";</script>
+    <script>
+        window.BASE_PATH = "<?php echo $base_path; ?>";
+        window.FORMSPREE_ENDPOINT = "<?php echo getenv('FORMSPREE_ENDPOINT') ?: 'https://formspree.io/f/YOUR_FORM_ID'; ?>";
+    </script>
+    <link rel="canonical" href="https://www.adinfotech.com/contact.php">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact Us | AD Infotech Nehru Place New Delhi">
+    <meta property="og:description" content="Get in touch with AD Infotech for computer hardware, IT support, AMC services, and server installation in Delhi NCR.">
+    <meta property="og:image" content="https://www.adinfotech.com/assets/images/hero_it_infrastructure.webp">
+    <meta property="og:url" content="https://www.adinfotech.com/contact.php">
+    <meta property="og:site_name" content="AD Infotech">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Us | AD Infotech Nehru Place New Delhi">
+    <meta name="twitter:description" content="Get in touch with AD Infotech for computer hardware, IT support, AMC services, and server installation in Delhi NCR.">
+    <meta name="twitter:image" content="https://www.adinfotech.com/assets/images/hero_it_infrastructure.webp">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "A D Infotech",
+      "image": "https://www.adinfotech.com/assets/images/logo.webp",
+      "telephone": "+91-9811022936",
+      "email": "infotech.dilip@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nehru Place",
+        "addressRegion": "New Delhi",
+        "postalCode": "110019",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.5493921,
+        "longitude": 77.2514339
+      },
+      "url": "https://www.adinfotech.com/",
+      "priceRange": "₹₹"
+    }
+    </script>
 </head>
 <body>
     <div class="top-strip">
@@ -34,8 +79,8 @@ $base_path = $base_path . '/';
     <header class="sticky-header-container">
         <nav class="nav-bar scrolled">
             <a href="<?php echo $base_path; ?>index.php#home" class="nav-brand" aria-label="AD Infotech Home">
-                <img src="<?php echo $base_path; ?>assets/images/logo-dark.png" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
-                <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="nav-logo-img logo-light">
+                <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-dark.webp" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
+                <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-light.webp" alt="AD Infotech Logo" class="nav-logo-img logo-light">
             </a>
             <ul class="nav-links-desktop">
                 <li><a href="<?php echo $base_path; ?>index.php#home" class="nav-link">Home</a></li>
@@ -80,7 +125,7 @@ $base_path = $base_path . '/';
                     <h3 class="contact-info-title">Contact Details</h3>
                     <p class="contact-info-desc">Visit our sales hub in Nehru Place or give us a call for direct wholesale hardware pricing and quotes.</p>
                     <div class="contact-banner-card">
-                        <img src="<?php echo $base_path; ?>assets/images/contact_support.png" alt="Computer Helpdesk Customer Support" class="contact-banner-img">
+                        <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/contact_support.webp" alt="Computer Helpdesk Customer Support" class="contact-banner-img">
                         <div class="contact-banner-overlay"></div>
                         <span class="contact-status-badge">
                             <span class="contact-status-dot"></span>
@@ -131,6 +176,7 @@ $base_path = $base_path . '/';
                     <h3 class="contact-form-title">Send Us a Message</h3>
                     <p class="contact-form-desc">Fill out the form below to enquire about buying computers, original spares, toner refills, or to book a repair service. We will get back to you shortly.</p>
                     <form id="contact-enquiry-form" class="contact-form" novalidate>
+                        <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <div class="form-group">
                             <label for="name" class="form-label">Full Name</label>
                             <div class="form-input-wrapper">
@@ -171,8 +217,22 @@ $base_path = $base_path . '/';
                             <label for="message" class="form-label">Your Message</label>
                             <textarea id="message" name="message" class="form-control form-textarea" placeholder="Tell us about your requirement..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                        <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-full">
+                            <span id="contact-submit-text">Send Message</span>
+                            <svg id="contact-btn-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            <svg id="contact-btn-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none; width: 18px; height: 18px; margin-left: 8px; animation: spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="6.34" y1="17.66" x2="9.17" y2="14.83"/><line x1="14.83" y1="9.17" x2="17.66" y2="6.34"/></svg>
+                        </button>
                     </form>
+
+                    <div id="contact-success-toast" class="glass-card contact-success-box" style="display: none; margin-top: 20px;">
+                        <div class="contact-success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; color: #10b981;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+                        </div>
+                        <div>
+                            <h5 class="contact-success-title" style="margin: 0; font-size: 1rem; color: #10b981;">Message Sent Successfully!</h5>
+                            <p class="contact-success-desc" style="margin: 4px 0 0; font-size: 0.875rem; color: #64748b;">Thank you. Our support representative will contact you shortly.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -182,7 +242,7 @@ $base_path = $base_path . '/';
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="<?php echo $base_path; ?>index.php#home" class="footer-logo" aria-label="AD Infotech Home">
-                    <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="footer-logo-img">
+                    <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-light.webp" alt="AD Infotech Logo" class="footer-logo-img">
                 </a>
                 <p class="footer-brand-desc">Providing premium enterprise-level IT hardware, peripherals, and proactive support services across New Delhi since 2006.</p>
                 <div class="footer-socials">
@@ -228,11 +288,12 @@ $base_path = $base_path . '/';
         </div>
         <div class="footer-bottom">
             <div class="container footer-bottom-container">
-                <p>&copy; <?php echo date('Y'); ?> A D Infotech. All rights reserved.</p>
+                <p>&copy; <?php echo date('Y'); ?> <a href="<?php echo $base_path; ?>index.php#home" style="color: inherit; text-decoration: underline;">A D Infotech</a>. All rights reserved.</p>
+                <p class="footer-powered">Powered by <a href="https://www.uniwebcreation.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">www.uniwebcreation.com</a></p>
             </div>
         </div>
     </footer>
 
-    <script src="<?php echo $base_path; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
+    <script defer src="<?php echo $base_path; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

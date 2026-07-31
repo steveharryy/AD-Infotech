@@ -1,10 +1,7 @@
 <?php
-// Prevent browser caching so changes load immediately.
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+require_once __DIR__ . '/security-headers.php';
+header("Cache-Control: public, max-age=86400, stale-while-revalidate=600");
 
-// Dynamic base path so assets resolve in any subdirectory.
 $base_path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
 $base_path = $base_path . '/';
@@ -22,9 +19,44 @@ $base_path = $base_path . '/';
     <script>
         window.BASE_PATH = "<?php echo $base_path; ?>";
     </script>
+    <link rel="canonical" href="https://www.adinfotech.com/about.php">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About Us | AD Infotech - 20 Years of Trusted IT Solutions">
+    <meta property="og:description" content="Learn about A D Infotech - 20+ years providing computer hardware, peripherals, AMC, printer cartridges, and server workstations.">
+    <meta property="og:image" content="https://www.adinfotech.com/assets/images/hero_it_infrastructure.webp">
+    <meta property="og:url" content="https://www.adinfotech.com/about.php">
+    <meta property="og:site_name" content="AD Infotech">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us | AD Infotech - 20 Years of Trusted IT Solutions">
+    <meta name="twitter:description" content="Learn about A D Infotech - 20+ years providing computer hardware, peripherals, AMC, printer cartridges, and server workstations.">
+    <meta name="twitter:image" content="https://www.adinfotech.com/assets/images/hero_it_infrastructure.webp">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "A D Infotech",
+      "image": "https://www.adinfotech.com/assets/images/logo.webp",
+      "telephone": "+91-9811022936",
+      "email": "infotech.dilip@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nehru Place",
+        "addressRegion": "New Delhi",
+        "postalCode": "110019",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.5493921,
+        "longitude": 77.2514339
+      },
+      "url": "https://www.adinfotech.com/",
+      "priceRange": "₹₹"
+    }
+    </script>
 </head>
 <body>
-    <!-- TOP CONTACT STRIP -->
+
     <div class="top-strip">
         <div class="container top-strip-container">
             <div class="top-strip-links">
@@ -52,12 +84,11 @@ $base_path = $base_path . '/';
         </div>
     </div>
 
-    <!-- FLOATING STICKY HEADER & NAV -->
     <header class="sticky-header-container">
         <nav class="nav-bar scrolled">
             <a href="<?php echo $base_path; ?>index.php#home" class="nav-brand" aria-label="AD Infotech Home">
-                <img src="<?php echo $base_path; ?>assets/images/logo-dark.png" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
-                <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="nav-logo-img logo-light">
+                <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-dark.webp" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
+                <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-light.webp" alt="AD Infotech Logo" class="nav-logo-img logo-light">
             </a>
 
             <ul class="nav-links-desktop">
@@ -99,7 +130,6 @@ $base_path = $base_path . '/';
         </nav>
     </header>
 
-    <!-- PAGE HERO -->
     <section class="about-page-hero">
         <div class="about-page-hero-glow"></div>
         <div class="container">
@@ -129,7 +159,6 @@ $base_path = $base_path . '/';
         </div>
     </section>
 
-    <!-- ABOUT US SECTION -->
     <section class="section-padding about-section" style="position:relative;">
         <div class="about-glow"></div>
         <div class="container">
@@ -167,7 +196,6 @@ $base_path = $base_path . '/';
         </div>
     </section>
 
-    <!-- MISSION & VISION -->
     <section class="section-padding mv-section">
         <div class="container">
             <div style="text-align:center; margin-bottom:64px;">
@@ -193,7 +221,6 @@ $base_path = $base_path . '/';
         </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
     <section class="section-padding whyus-section">
         <div class="container">
             <div style="text-align:center; margin-bottom:64px;">
@@ -248,12 +275,11 @@ $base_path = $base_path . '/';
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer-section">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="<?php echo $base_path; ?>index.php#home" class="footer-logo" aria-label="AD Infotech Home">
-                    <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="footer-logo-img">
+                    <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-light.webp" alt="AD Infotech Logo" class="footer-logo-img">
                 </a>
                 <p class="footer-brand-desc">Providing premium enterprise-level IT hardware, peripherals, and proactive support services across New Delhi since 2006.</p>
                 <div class="footer-socials">
@@ -288,19 +314,17 @@ $base_path = $base_path . '/';
         </div>
         <div class="footer-bottom">
             <div class="container footer-bottom-container">
-                <p>&copy; <?php echo date('Y'); ?> A D Infotech. All rights reserved.</p>
-                <p>Designed with Glassmorphism &amp; High-Performance UI systems.</p>
+                <p>&copy; <?php echo date('Y'); ?> <a href="<?php echo $base_path; ?>index.php#home" style="color: inherit; text-decoration: underline;">A D Infotech</a>. All rights reserved.</p>
+                <p class="footer-powered">Powered by <a href="https://www.uniwebcreation.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">www.uniwebcreation.com</a></p>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Widget -->
     <a href="https://wa.me/919811022936" target="_blank" rel="noopener noreferrer" class="whatsapp-widget" aria-label="Chat on WhatsApp">
         <svg viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 0 0 1.333 4.99L2 22l5.233-1.371a9.936 9.936 0 0 0 4.779 1.22c5.507 0 9.99-4.478 9.99-9.986 0-2.67-1.037-5.18-2.92-7.062A9.92 9.92 0 0 0 12.012 2zm5.835 14.165c-.256.726-1.5 1.33-2.046 1.402-.497.067-1.144.11-3.328-.8-2.793-1.163-4.59-4.008-4.73-4.195-.14-.187-1.136-1.509-1.136-2.879 0-1.37.717-2.043 1.01-2.35.293-.306.637-.382.85-.382.213 0 .426.002.61.01.196.008.46-.073.722.56.262.637.897 2.188.974 2.343.078.156.129.337.026.55-.104.214-.156.347-.311.53-.156.184-.328.408-.469.547-.156.155-.32.324-.138.637.182.311.81 1.336 1.734 2.162.925.826 1.708 1.082 2.022 1.238.314.156.497.13.682-.08.187-.214.793-.923 1.004-1.239.213-.314.426-.263.722-.156.295.109 1.874.883 2.196 1.044.322.16.536.24.613.375.078.134.078.775-.178 1.501z"/></svg>
         <span class="whatsapp-txt">Chat with Us</span>
     </a>
 
-    <!-- Scoped styles for about page -->
     <style>
     .about-page-hero {
         position: relative;
@@ -365,7 +389,7 @@ $base_path = $base_path . '/';
         font-weight: 500;
         letter-spacing: 0.02em;
     }
-    /* Mission & Vision */
+
     .mv-section { background: #F8FAFC; }
     .mv-grid {
         display: grid;
@@ -411,8 +435,7 @@ $base_path = $base_path . '/';
     }
     </style>
 
-    <script src="<?php echo $base_path; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
-
+    <script defer src="<?php echo $base_path; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
 
 </body>
 </html>

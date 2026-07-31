@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /enquiries.json
+Disallow: /rate_limits.json
+Disallow: /contact-handler.php
+Disallow: /nextjs-backup/
+
+Sitemap: https://www.adinfotech.com/sitemap.xml

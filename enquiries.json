@@ -48,5 +48,71 @@
         "service": "hardware",
         "message": "Checking website form readiness.",
         "ip_address": "::1"
+    },
+    {
+        "id": "enq_6a6b7a155987d",
+        "timestamp": "2026-07-30 18:21:41",
+        "name": "Test User",
+        "email": "test@example.com",
+        "phone": "+91 9876543210",
+        "service": "hardware",
+        "message": "Automated test enquiry verification.",
+        "ip_address": "::1",
+        "saved_db": true
+    },
+    {
+        "id": "enq_6a6b7a6221f2f",
+        "timestamp": "2026-07-30 18:22:58",
+        "name": "Test User",
+        "email": "test@example.com",
+        "phone": "+91 9876543210",
+        "service": "hardware",
+        "message": "Automated test enquiry verification.",
+        "ip_address": "::1",
+        "saved_db": true
+    },
+    {
+        "id": "enq_6a6b7a7857db4",
+        "timestamp": "2026-07-30 18:23:20",
+        "name": "Dilip Kumar",
+        "email": "infotech.dilip@gmail.com",
+        "phone": "+91 9811022936",
+        "service": "hardware",
+        "message": "Test enquiry message to verify database storage and Formspree delivery.",
+        "ip_address": "::1",
+        "saved_db": true
+    },
+    {
+        "id": "enq_6a6b7b26d4282",
+        "timestamp": "2026-07-30 18:26:14",
+        "name": "Dilip Kumar Test",
+        "email": "infotech.dilip@gmail.com",
+        "phone": "+91 9811022936",
+        "service": "hardware",
+        "message": "Clean env test submission.",
+        "ip_address": "::1",
+        "saved_db": true
+    },
+    {
+        "id": "enq_6a6c5c54441fa",
+        "timestamp": "2026-07-31 10:27:00",
+        "name": "Bluehost Compatibility Check",
+        "email": "bluehost@example.com",
+        "phone": "+91 9811022936",
+        "service": "hardware",
+        "message": "Testing Bluehost MySQL schema compatibility.",
+        "ip_address": "::1",
+        "saved_db": true
+    },
+    {
+        "id": "enq_6a6c5c843e4a8",
+        "timestamp": "2026-07-31 10:27:48",
+        "name": "Simple Query Test",
+        "email": "simple@example.com",
+        "phone": "+91 9811022936",
+        "service": "hardware",
+        "message": "Testing simplified SQL table query.",
+        "ip_address": "::1",
+        "saved_db": true
     }
 ]

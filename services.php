@@ -1,7 +1,6 @@
 <?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
+require_once __DIR__ . '/security-headers.php';
+header("Cache-Control: public, max-age=86400, stale-while-revalidate=600");
 
 $base_path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
@@ -65,6 +64,41 @@ $services = [
     <link rel="icon" type="image/x-icon" href="<?php echo $base_path; ?>assets/images/favicon.ico">
     <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css?v=ui-20260724">
     <script>window.BASE_PATH = "<?php echo $base_path; ?>";</script>
+    <link rel="canonical" href="https://www.adinfotech.com/services.php">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IT Support & AMC Services | AD Infotech New Delhi">
+    <meta property="og:description" content="Comprehensive AMC services, server setup, networking, printer cartridge refilling, and IT hardware support.">
+    <meta property="og:image" content="https://www.adinfotech.com/assets/images/hero_it_infrastructure.webp">
+    <meta property="og:url" content="https://www.adinfotech.com/services.php">
+    <meta property="og:site_name" content="AD Infotech">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IT Support & AMC Services | AD Infotech New Delhi">
+    <meta name="twitter:description" content="Comprehensive AMC services, server setup, networking, printer cartridge refilling, and IT hardware support.">
+    <meta name="twitter:image" content="https://www.adinfotech.com/assets/images/hero_it_infrastructure.webp">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "A D Infotech",
+      "image": "https://www.adinfotech.com/assets/images/logo.webp",
+      "telephone": "+91-9811022936",
+      "email": "infotech.dilip@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nehru Place",
+        "addressRegion": "New Delhi",
+        "postalCode": "110019",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.5493921,
+        "longitude": 77.2514339
+      },
+      "url": "https://www.adinfotech.com/",
+      "priceRange": "₹₹"
+    }
+    </script>
 </head>
 <body>
     <div class="top-strip">
@@ -82,8 +116,8 @@ $services = [
     <header class="sticky-header-container">
         <nav class="nav-bar scrolled">
             <a href="<?php echo $base_path; ?>index.php#home" class="nav-brand" aria-label="AD Infotech Home">
-                <img src="<?php echo $base_path; ?>assets/images/logo-dark.png" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
-                <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="nav-logo-img logo-light">
+                <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-dark.webp" alt="AD Infotech Logo" class="nav-logo-img logo-dark">
+                <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-light.webp" alt="AD Infotech Logo" class="nav-logo-img logo-light">
             </a>
             <ul class="nav-links-desktop">
                 <li><a href="<?php echo $base_path; ?>index.php#home" class="nav-link">Home</a></li>
@@ -125,7 +159,7 @@ $services = [
             <div class="services-grid">
                 <?php foreach ($services as $service): ?>
                 <article class="service-card glass-card">
-                    <img class="service-image" src="<?php echo htmlspecialchars($service['image']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>" loading="lazy">
+                    <img loading="lazy" decoding="async" class="service-image" src="<?php echo htmlspecialchars($service['image']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>" loading="lazy">
                     <div class="service-card-body">
                         <h2 class="service-card-title"><?php echo htmlspecialchars($service['title']); ?></h2>
                         <p class="service-card-text"><?php echo htmlspecialchars($service['body']); ?></p>
@@ -146,7 +180,7 @@ $services = [
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="<?php echo $base_path; ?>index.php#home" class="footer-logo" aria-label="AD Infotech Home">
-                    <img src="<?php echo $base_path; ?>assets/images/logo-light.png" alt="AD Infotech Logo" class="footer-logo-img">
+                    <img loading="lazy" decoding="async" src="<?php echo $base_path; ?>assets/images/logo-light.webp" alt="AD Infotech Logo" class="footer-logo-img">
                 </a>
                 <p class="footer-brand-desc">Providing premium enterprise-level IT hardware, peripherals, and proactive support services across New Delhi since 2006.</p>
                 <div class="footer-socials">
@@ -192,11 +226,12 @@ $services = [
         </div>
         <div class="footer-bottom">
             <div class="container footer-bottom-container">
-                <p>&copy; <?php echo date('Y'); ?> A D Infotech. All rights reserved.</p>
+                <p>&copy; <?php echo date('Y'); ?> <a href="<?php echo $base_path; ?>index.php#home" style="color: inherit; text-decoration: underline;">A D Infotech</a>. All rights reserved.</p>
+                <p class="footer-powered">Powered by <a href="https://www.uniwebcreation.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">www.uniwebcreation.com</a></p>
             </div>
         </div>
     </footer>
 
-    <script src="<?php echo $base_path; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
+    <script defer src="<?php echo $base_path; ?>assets/js/main.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>
