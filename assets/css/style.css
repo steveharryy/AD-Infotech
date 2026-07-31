@@ -2266,6 +2266,23 @@ input[type="range"]::-webkit-slider-thumb:hover {
   height: 14px;
 }
 
+.product-card-footer .btn,
+.product-card-footer .btn-secondary {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+.product-card-footer .btn:hover,
+.product-card-footer .btn-secondary:hover {
+  background-color: #ff6124;
+  color: #ffffff;
+  border-color: #ff6124;
+  box-shadow: 0 4px 14px rgba(255, 97, 36, 0.28);
+}
+
 @media (max-width: 1024px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
