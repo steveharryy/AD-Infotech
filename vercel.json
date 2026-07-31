@@ -2,8 +2,28 @@
   "version": 2,
   "builds": [
     {
-      "src": "*.php",
-      "use": "vercel-php@0.6.0"
+      "src": "index.php",
+      "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "about.php",
+      "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "services.php",
+      "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "products.php",
+      "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "contact.php",
+      "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "contact-handler.php",
+      "use": "vercel-php@0.7.2"
     },
     {
       "src": "assets/**",
@@ -30,6 +50,10 @@
     {
       "src": "/contact",
       "dest": "/contact.php"
+    },
+    {
+      "src": "/contact-handler.php",
+      "dest": "/contact-handler.php"
     },
     {
       "src": "/(.*\\.php)",
