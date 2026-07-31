@@ -26,22 +26,6 @@
       "use": "vercel-php@0.7.2"
     },
     {
-      "src": "security-headers.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "session-init.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "env-loader.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "db.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
       "src": "assets/**",
       "use": "@vercel/static"
     }
