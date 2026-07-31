@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/security-headers.php';
+if (!headers_sent()) { header("X-Content-Type-Options: nosniff"); header("X-Frame-Options: SAMEORIGIN"); header("X-XSS-Protection: 1; mode=block"); header("Referrer-Policy: strict-origin-when-cross-origin"); }
 header("Cache-Control: public, max-age=86400, stale-while-revalidate=600");
 
 $base_path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
