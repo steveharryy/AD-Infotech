@@ -1,67 +1,34 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "index.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "about.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "services.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "products.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "contact.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "contact-handler.php",
-      "use": "vercel-php@0.7.2"
-    },
-    {
-      "src": "assets/**",
-      "use": "@vercel/static"
-    }
-  ],
+  "cleanUrls": true,
   "routes": [
     {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
     {
-      "src": "/about",
-      "dest": "/about.php"
+      "src": "/about(\\.html|\\.php)?",
+      "dest": "/about.html"
     },
     {
-      "src": "/services",
-      "dest": "/services.php"
+      "src": "/services(\\.html|\\.php)?",
+      "dest": "/services.html"
     },
     {
-      "src": "/products",
-      "dest": "/products.php"
+      "src": "/products(\\.html|\\.php)?",
+      "dest": "/products.html"
     },
     {
-      "src": "/contact",
-      "dest": "/contact.php"
+      "src": "/contact(\\.html|\\.php)?",
+      "dest": "/contact.html"
     },
     {
-      "src": "/contact-handler.php",
-      "dest": "/contact-handler.php"
+      "src": "/index(\\.html|\\.php)?",
+      "dest": "/index.html"
     },
     {
-      "src": "/(.*\\.php)",
+      "src": "/(.*)",
       "dest": "/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/index.php"
     }
   ]
 }
