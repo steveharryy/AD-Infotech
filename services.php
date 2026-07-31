@@ -9,43 +9,35 @@ $base_path = $base_path . '/';
 $services = [
     [
         'title' => 'Complete IT Managed Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/ad-sw1.jpg',
+        'image' => 'services_setup.webp',
         'body' => 'At AD Infotech, we provide complete IT managed services that keep your business secure, efficient, and always connected. From proactive monitoring to helpdesk support and infrastructure management, we handle the day-to-day responsibilities of your technology environment so your team can focus on growth.'
     ],
     [
         'title' => 'IT Consulting Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/ad-s3.jpeg',
+        'image' => 'hero_it_infrastructure.webp',
         'body' => 'Our IT consulting services help organizations make smarter technology choices. We assess your current environment, identify improvement areas, and build a practical roadmap for cloud adoption, digital transformation, cyber resilience, and long-term scalability.'
     ],
     [
         'title' => 'AMC Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/ad-s4.jpg',
+        'image' => 'about_workspace.webp',
         'body' => 'Our Annual Maintenance Contracts ensure that your hardware, networking, and business systems remain in peak condition. With regular upkeep, fast issue resolution, and planned support, we help reduce downtime and extend the life of your technology investments.'
     ],
     [
         'title' => 'Cloud Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/ad-s5.jpg',
+        'image' => 'hero_it_illustration.webp',
         'body' => 'We design and manage cloud solutions that bring flexibility, agility, and cost-efficiency to modern businesses. Whether you need migration, infrastructure setup, or hybrid cloud support, AD Infotech helps you build a dependable and scalable cloud environment.'
     ],
     [
         'title' => 'Network Security Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/a-d-s6.jpg',
+        'image' => 'product_networking.webp',
         'body' => 'Our network security services protect your organization from evolving cyber threats. We focus on firewall protection, intrusion monitoring, vulnerability assessment, and ongoing security improvements to keep your data and operations safe.'
     ],
     [
         'title' => 'Backup & Recovery Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/a-d-s-7-1024x576.png',
+        'image' => 'product_aio.webp',
         'body' => 'Business continuity starts with reliable backup and recovery. We create secure backup strategies and disaster recovery plans that help you recover quickly from outages, data loss, or unexpected disruptions while minimizing operational impact.'
     ],
     [
-        'title' => 'Migration & Upgrade Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/a-d-s-8.jpg',
-        'body' => 'Our migration and upgrade services simplify technology changes with minimal disruption. From platform migrations to hardware upgrades and software modernization, we ensure your systems move forward smoothly and safely.'
-    ],
-    [
-        'title' => 'Antivirus & Firewall Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/03/antivirus.jpg',
-        'body' => 'We provide robust antivirus and firewall protection to defend your workplace from malware, unauthorized access, and modern cyber risks. Our layered security approach helps keep your network and devices protected around the clock.'
     ],
     [
         'title' => 'Desktop Management Services',
@@ -159,7 +151,7 @@ $services = [
             <div class="services-grid">
                 <?php foreach ($services as $service): ?>
                 <article class="service-card glass-card">
-                    <img loading="lazy" decoding="async" class="service-image" src="<?php echo htmlspecialchars($service['image']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>" loading="lazy">
+                    <img loading="lazy" decoding="async" class="service-image" src="<?php echo $base_path; ?>assets/images/<?php echo htmlspecialchars($service['image']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>">
                     <div class="service-card-body">
                         <h2 class="service-card-title"><?php echo htmlspecialchars($service['title']); ?></h2>
                         <p class="service-card-text"><?php echo htmlspecialchars($service['body']); ?></p>
