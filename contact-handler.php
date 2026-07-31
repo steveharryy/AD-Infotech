@@ -12,6 +12,22 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 header('Content-Type: application/json');
 
+$clientIP = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+$now = time();
+$rateFile = __DIR__ . '/rate_limits.json';
+$limits = file_exists($rateFile) ? (json_decode(@file_get_contents($rateFile), true) ?: []) : [];
+
+$userTs = array_values(array_filter($limits[$clientIP] ?? [], fn($ts) => ($now - $ts) < 600));
+if (count($userTs) >= 5) {
+    header('HTTP/1.1 429 Too Many Requests');
+    echo json_encode(['status' => 'error', 'message' => 'Too many requests. You can send maximum 5 messages per 10 minutes. Please try again later.']);
+    exit;
+}
+
+$userTs[] = $now;
+$limits[$clientIP] = $userTs;
+@file_put_contents($rateFile, json_encode($limits), LOCK_EX);
+
 $name = str_replace(["\r", "\n"], '', strip_tags(trim($_POST['name'] ?? '')));
 $email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
 $phone = str_replace(["\r", "\n"], '', strip_tags(trim($_POST['phone'] ?? '')));
@@ -23,7 +39,6 @@ if (empty($name) || !$email || empty($message)) {
     exit;
 }
 
-$clientIP = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
 $uid = uniqid('enq_');
 $nowStr = date('Y-m-d H:i:s');
 
@@ -59,7 +74,7 @@ if (!empty($ep)) {
 
 $emailSubject = "New Website Enquiry from " . $name;
 $emailHeaders = "MIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nFrom: AD Infotech <no-reply@adinfotech.online>\r\nReply-To: {$name} <{$email}>\r\n";
-$emailBody = "<h2>New Website Enquiry</h2><p><b>Name:</b> {$name}</p><p><b>Email:</b> {$email}</p><p><b>Phone:</b> " . ($phone ?: 'Not provided') . "</p><p><b>Service:</b> " . ucwords(str_replace('_', ' ', $service)) . "</p><p><b>Message:</b><br>" . nl2br(htmlspecialchars($message)) . "</p>";
+$emailBody = "2New Website Enquiry</h2><p><b>Name:</b> {$name}</p><p><b>Email:</b> {$email}</p><p><b>Phone:</b> " . ($phone ?: 'Not provided') . "</p><p><b>Service:</b> " . ucwords(str_replace('_', ' ', $service)) . "</p><p><b>Message:</b><br>" . nl2br(htmlspecialchars($message)) . "</p>";
 
 @mail('info@adinfotech.online', $emailSubject, $emailBody, $emailHeaders);
 
