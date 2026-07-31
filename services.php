@@ -38,10 +38,8 @@ $services = [
         'body' => 'Business continuity starts with reliable backup and recovery. We create secure backup strategies and disaster recovery plans that help you recover quickly from outages, data loss, or unexpected disruptions while minimizing operational impact.'
     ],
     [
-    ],
-    [
         'title' => 'Desktop Management Services',
-        'image' => 'https://adinfotech.online/wp-content/uploads/2024/02/DESKTOPS-1.jpg-1-1.jpg',
+        'image' => 'product_desktop.webp',
         'body' => 'Our desktop management services keep employee systems secure, updated, and high-performing. We help with deployment, maintenance, issue resolution, and centralized management so your team can work without interruption.'
     ]
 ];
@@ -150,6 +148,7 @@ $services = [
         <section class="container services-page-section">
             <div class="services-grid">
                 <?php foreach ($services as $service): ?>
+                <?php if (empty($service['title'])) continue; ?>
                 <article class="service-card glass-card">
                     <img loading="lazy" decoding="async" class="service-image" src="<?php echo $base_path; ?>assets/images/<?php echo htmlspecialchars($service['image']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>">
                     <div class="service-card-body">
