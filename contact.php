@@ -4,11 +4,15 @@ require_once __DIR__ . '/env-loader.php';
 load_env_vars();
 header("Cache-Control: public, max-age=86400, stale-while-revalidate=600");
 require_once __DIR__ . '/session-init.php';
-start_secure_session();
+@start_secure_session();
 
 if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    $token = bin2hex(random_bytes(16));
+    if (isset($_SESSION)) {
+        $_SESSION['csrf_token'] = $token;
+    }
 }
+$csrfToken = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(16));
 
 $base_path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
 $base_path = ($base_path === '/' || $base_path === '\\') ? '' : $base_path;
@@ -176,7 +180,7 @@ $base_path = $base_path . '/';
                     <h3 class="contact-form-title">Send Us a Message</h3>
                     <p class="contact-form-desc">Fill out the form below to enquire about buying computers, original spares, toner refills, or to book a repair service. We will get back to you shortly.</p>
                     <form id="contact-enquiry-form" class="contact-form" novalidate>
-                        <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="form-group">
                             <label for="name" class="form-label">Full Name</label>
                             <div class="form-input-wrapper">
