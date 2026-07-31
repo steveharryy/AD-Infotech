@@ -25,7 +25,7 @@ $base_path = $base_path . '/';
     <link rel="stylesheet" href="<?php echo $base_path; ?>assets/css/style.css?v=ui-20260724">
     <script>
         window.BASE_PATH = "<?php echo $base_path; ?>";
-        window.FORMSPREE_ENDPOINT = "<?php echo getenv('FORMSPREE_ENDPOINT') ?: 'https://formspree.io/f/YOUR_FORM_ID'; ?>";
+        window.FORMSPREE_ENDPOINT = "<?php echo getenv('FORMSPREE_ENDPOINT') ?: 'https://formspree.io/f/xlgqkelz'; ?>";
     </script>
     <link rel="canonical" href="https://www.adinfotech.com/contact.php">
     <meta property="og:type" content="website">
